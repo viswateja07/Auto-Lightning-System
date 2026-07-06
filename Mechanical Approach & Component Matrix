@@ -1,0 +1,18 @@
+The structural breakdown of hardware required to physically construct the prototype:
+Component Category	Part Name / Model	Quantity	Technical Purpose / Connection Role
+Main Processing Unit	ESP32 Wi-Fi + Bluetooth MCU	1	Acts as the AI Processing Unit; reads sensor data and outputs wireless metrics and PWM signals. 
+Light Sensing	Photoresistor (LDR) / BH1750	1	Continuously measures ambient light levels (Lux). Connected via an analog pin or I2C. 
+Occupancy Detection	HC-SR501 PIR Motion Sensor	1	Detects human movement across a 120° cone. Connected to a digital input pin. 
+Dimming Mechanism	IRF540N MOSFET Module / Optocoupler	1	Acts as the PWM controller hardware. Translates low-voltage logic into high-current power gating. 
+Illumination Source	12V DC LED Strip or Intelligent LED Bulb	1 Block	The primary light source capable of analog or PWM intensity scaling. 
+System Power	12V 2A DC Power Adapter + Step-Down	1	Provides high-power rail for LEDs and steps down to 5V/3.3V for the ESP32.
+4. Virtual Simulation Platforms (Online Prototyping)
+To present a virtual interactive proof-of-concept before purchasing real hardware, use these online assembly simulators:
+1. Wokwi (Recommended for ESP32 and Advanced IoT)
+•	What it does: An online electronic simulator that perfectly compiles Arduino, ESP32, and Raspberry Pi Pi Pico projects in real time. It natively supports PIR sensors, LDRs, and PWM-controlled LED segments.
+•	Why it's perfect for this: You can write actual C++/Python code, see the virtual LED dim smoothly depending on your slider inputs for light, and simulate data transmission over a virtual internet connection.
+2. Autodesk Tinkercad Circuits
+•	What it does: A highly visual, drag-and-drop wiring simulator.
+•	Why it's perfect for this: Great for initial structural and mechanical diagram proofs. You can visually wire a microcontroller, plug in an adjustable light sensor (LDR), and observe oscilloscope waves changing through PWM.
+5. Detailed Connection Process & Step-by-Step Wiring Manual
+Follow these step-by-step instructions to map out your virtual wiring on Wokwi/Tinkercad or to assemble your real physical component prototype.
