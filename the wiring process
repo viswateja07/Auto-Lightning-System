@@ -1,0 +1,18 @@
+Step 1: Wiring the LDR (Ambient Light Monitor)
+	Place the LDR on a breadboard. Connect one terminal to the 3.3V pin of the ESP32.
+	Connect the second terminal to an analog input pin (e.g., GPIO 4 / ADC1).
+	Connect a 10"k" Ω pull-down resistor from that same analog pin terminal to the GND pin. This creates a voltage divider network to translate light resistance variations into readable analog voltages.
+Step 2: Wiring the PIR Sensor (Occupancy Core)
+	Connect the VCC pin of the PIR sensor to the 5V / VIN pin of the micro-controller board.
+	Connect the GND pin of the PIR sensor to the common GND rail on your layout.
+	Connect the middle OUT digital pin of the PIR to GPIO 19.
+Step 3: Wiring the PWM Controller & Output Array
+Safety Warning: Do not connect high-draw LED arrays directly to microcontroller GPIO pins to prevent thermal damage. Always route power through a logic-level switching MOSFET.
+	Connect GPIO 18 (designated as your PWM output) to the Gate (G) pin of the IRF540N MOSFET module.
+	Connect the Source (S) pin of the MOSFET directly to the common GND rail.
+	Connect the negative terminal (-) of your 12V LED Strip to the Drain (D) pin of the MOSFET.
+	Connect the positive terminal (+) of your 12V LED Strip directly to the positive terminal of the 12V External Power Supply.
+	Connect the negative ground terminal of the 12V external power supply directly to the micro-controller's GND pin to establish a unified reference ground.
+Step 4: Logic Configuration & Testing Loop
+	State A (Space is Empty): If PIR input reads LOW, the PWM signal writes a duty cycle value of 0 (system overrides to an off state to save 100% of passive overheads). 
+	State B (Space is Occupied): When PIR goes HIGH, the AI loop reads the current ADC value from the LDR. If daylight is abundant, the PWM duty cycle hovers low (1%" to " 20%). As natural light diminishes, the edge logic linearly scales the PWM value upward to 100% intensity, matching standard task constraints flawlessly. 
