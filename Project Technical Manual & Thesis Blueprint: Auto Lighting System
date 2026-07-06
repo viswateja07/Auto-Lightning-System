@@ -1,0 +1,20 @@
+Project Technical Manual & Thesis Blueprint: Auto Lighting System
+1. Project Overview & Comprehensive Details
+The Auto Lighting System is an ambient-responsive, intelligent illumination ecosystem designed to transition residential and urban environments from passive hardware to autonomous IoT networks. By continuous real-time monitoring of natural light levels and human occupancy patterns, the system automatically calibrates brightness and color temperature without human intervention. 
+	Problem Statement: Traditional lighting infrastructure relies heavily on manual control, resulting in static operations that cannot adapt to natural light availability or vacancy. This causes severe energy wastage (accounting for a 40% to 60% inflation in power bills), biological disruptions to human circadian rhythms, and accelerates global carbon emissions. 
+	Core Objective: To design and prototype a wireless, modular smart lighting system that automatically cuts energy overheads by 40–60%, improves indoor task safety, and aligns explicitly with United Nations Sustainable Development Goals: SDG 7 (Affordable & Clean Energy), SDG 11 (Sustainable Cities), and SDG 13 (Climate Action). 
+2. Technical Design & Architecture Approach
+To maximize efficiency, stability, and ease of deployment, the system employs a low-latency Edge-AI IoT architecture. This avoids massive retrofitting and rewiring costs by leveraging wireless network dominance. 
+System Architecture Flow
+"Sensors (LDR + PIR)"⟶"Edge Microcontroller (ESP32 Node)"⟶"PWM Controller"⟶"Dimming LED Array" 
+1. Data Acquisition Layer (Sensors)
+	Photoelectric Sensor (LDR): Tracks changing ambient daylight intensities throughout the day. 
+	Passive Infrared Sensor (PIR): Detects human motion and occupancy inside target zones. 
+2. Processing & Edge-AI Layer
+	The data from the sensors is processed locally by a microcontroller acting as an Edge AI Processing Unit. 
+	The Predictive Algorithm: Instead of rigid threshold switching, the edge processor utilizes a localized polynomial smoothing equation to map ambient lux (L) to the required Pulse Width Modulation duty cycle (D).
+	To prevent sudden, jarring light flickers when a cloud passes by, a simple moving average filter is applied to the sensor inputs:
+D_"target" =max⁡(0,min⁡(100,α⋅(L_"target" -L_"ambient"  )) )
+3. Control & Output Layer
+	PWM Dimming: The micro-controller generates Pulse-Width Modulation signals to cycle power to the driver at high frequencies, achieving precise control from 1% to 100% brightness. 
+	Wireless Dashboard Integration: Operates on local Wi-Fi or Bluetooth protocols to send real-time consumption feedback to a unified monitoring dashboard. 
